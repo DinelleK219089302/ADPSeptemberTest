@@ -130,12 +130,17 @@ public class MovieRepository implements IMovieRepository
         CategoryRepository categoryRepository = CategoryRepository.getRepository();
 
         String categoryId = categoryRepository.getIdByGenre(genre);
+        String movieId, title;
 
         Set<String> moviesGivenGenre = new HashSet<String>();
         Set<MovieCategory> movies = movieCategoryRepository.getMovieCategoriesGivenCategoryId(categoryId);
 
         for (MovieCategory m : movies)
-            moviesGivenGenre.add(read(m.getMovieId()).getTitle());
+        {
+            movieId = m.getMovieId();
+            title = read(m.getMovieId()).getTitle();
+            moviesGivenGenre.add(title = read(m.getMovieId()).getTitle());
+        }
 
         return moviesGivenGenre;
     }
